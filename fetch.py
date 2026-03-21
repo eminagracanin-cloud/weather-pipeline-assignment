@@ -64,12 +64,28 @@ conn.close()
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 weather_text = ""
+weather_display = ""
+
 for row in rows:
+    location, date, temp, wind, rain = row
+
+    # Simple weather emoji logic
+    if rain > 2:
+        emoji = "🌧️"
+    elif wind > 20:
+        emoji = "🌬️"
+    else:
+        emoji = "☀️"
+
     weather_text += (
-        f"{row[0]}: temperature {row[2]}°C, "
-        f"wind speed {row[3]} km/h, "
-        f"precipitation {row[4]} mm.\n"
+        f"{location}: temperature {temp}°C, "
+        f"wind speed {wind} km/h, "
+        f"precipitation {rain} mm.\n"
     )
+
+    flag = "🇧🇦" if location == "Bosnia" else "🇩🇰"
+
+    weather_display += f"{flag} {location}: {temp}°C {emoji}<br>"
 
 prompt = f"""
 Write a short, creative weather poem comparing these three locations:
