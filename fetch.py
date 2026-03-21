@@ -87,21 +87,27 @@ for row in rows:
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 prompt = f"""
-Write a short poetic comparison of the weather in these locations:
+Write a short weather poem based on these locations:
 
 {weather_text}
 
-Requirements:
-- Compare the three places
+Rules:
+- Compare Bosnia, Copenhagen, and Aalborg
 - Say where it would be nicest to be tomorrow
-- Write in two languages: English and Bosnian
-- Use this exact structure:
+- Write ONLY in these two sections and in this exact format
+- Do NOT add any introduction
+- Do NOT add any explanation
+- Do NOT add any translation note
+- Do NOT repeat the English text
+- Do NOT include markdown symbols like **
+
+Use exactly this structure:
 
 English:
-<english poem>
+<only the English poem>
 
 Bosanski:
-<bosnian poem>
+<samo pjesma na bosanskom>
 """
 
 response = client.chat.completions.create(
@@ -119,6 +125,9 @@ if "Bosanski:" in poem:
     parts = poem.split("Bosanski:", 1)
     poem_en = parts[0].replace("English:", "").strip()
     poem_bs = parts[1].strip()
+
+    if "Translated from Bosnian:" in poem_bs:
+        poem_bs = poem_bs.split("Translated from Bosnian:")[0].strip()
 else:
     poem_en = poem.replace("English:", "").strip()
 
