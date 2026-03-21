@@ -1,10 +1,10 @@
-
 <html>
 <head>
     <title>Weather Poem</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
             color: #333;
             text-align: center;
@@ -12,58 +12,97 @@
         }
 
         h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 25px;
         }
 
         .flag {
             font-size: 40px;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .weather-box {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }
+
+        .weather-item {
+            margin: 8px 0;
+            font-weight: bold;
         }
 
         .poem-box {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            max-width: 850px;
-            margin: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: left;
-            white-space: pre-wrap;
-            line-height: 1.7;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
+
 <body>
-    <h1>🌦️ Weather Poem 🌦️</h1>
-    <div class="flag">🇧🇦 Bosnia &nbsp;&nbsp; 🇩🇰 Denmark</div>
-    <div class="poem-box">**English Section**
 
-A gentle breeze whispers through the lands,
-Bosnia, Copenhagen, Aalborg, each a gentle hand.
-The temperature's calm, a soothing sight,
-But which would be most pleasant tomorrow, a quiet delight?
+    <div class="container">
 
-Bosnia's warmth beckons, 11.1°C a gentle charm,
-Copenhagen's chill, a mere 7.5°C, a colder alarm.
-Aalborg's temperature, 11.0°C, a soothing breeze,
-But wind and breeze, which one would bring us to our knees?
+        <h1>🌦️ Weather Poem 🌦️</h1>
+        <div class="subtitle">Comparing Bosnia & Denmark</div>
 
-The answer lies not in the wind's gentle sway,
-But in a place where calm and warmth entwine the day.
-Tomorrow, we'd rather be in Aalborg's gentle grasp,
-Where 11.0°C and a soft breeze would bring a pleasant pass.
+        <div class="flag">🇧🇦 🇩🇰</div>
 
-**Bosnian Sekcija**
+        <!-- WEATHER SECTION -->
+        <div class="weather-box">
+            <h2>🌡️ Weather Tomorrow</h2>
 
-Neobično tihi vjetar prolazi kroz zemlje,
-Bosna, Kopenhagen, Aalborg, svaki nešto drugačije.
-Temperatura mirisava, pogled kojeg mi čini hladnim,
-Ali gdje bi bilo najljepše biti sutra, bez straha ili straha?
+            <!-- THIS PART WILL BE FILLED BY PYTHON -->
+            {weather_display}
 
-Ljubav Bosne je snažna, 11.1°C, lako čakavski čaj,
-Kopenhagen je hladniji, 7.5°C, hladan dan bez jutra.
-Aalborg je tih, 11.0°C, vjetar koji umiruje,
+        </div>
+
+        <!-- POEM -->
+        <div class="poem-box">
+
+            <div class="section-title">🇬🇧 English</div>
+            <p>{poem_en}</p>
+
+            <hr>
+
+            <div class="section-title">🇧🇦 Bosanski</div>
+            <p>{poem_bs}</p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>Aalborg je tih, 11.0°C, vjetar koji umiruje,
 Ali kome će biti ljubavni ujutru bez straha ili straha?
 
 Odgovor nije u tihi vjetar koji prolazi šumom,
