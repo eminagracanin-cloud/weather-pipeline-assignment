@@ -1,3 +1,6 @@
+from groq import Groq
+import os
+
 import requests
 import sqlite3
 
@@ -47,3 +50,42 @@ conn.commit()
 conn.close()
 
 print("Weather data stored successfully.")
+
+# ── Generate poem with Groq ─────────────────────────────
+
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
+# Get weather data
+cursor = sqlite3.connect("weather.db").cursor()
+cursor.execute("SELECT * FROM weather")
+rows = cursor.fetchall()
+
+# Create prompt
+weather_text = ""
+for row in rows:
+    weather_text += f"{row[0]}: {row[2]}°C, wind {row[3]}, rain {row[4]}\n"
+
+prompt = f"""
+Write a short poetic comparison of the weather in these locations:
+
+{weather_text}
+
+Requirements:
+- Compare the three places
+- Say where it is nicest to be tomorrow
+- Write in English and Bosnian
+"""
+
+# Call Groq
+response = client.chat.completions.create(
+    model="llama-3.1-8b-instant",
+    messages=[{"role": "user", "content": prompt}]
+)
+
+poem = response.choices[0].message.content
+
+# Save poem to HTML
+with open("docs/index.html", "w") as f:
+    f.write(f"<html><body><h1>Weather Poem</h1><pre>{poem}</pre></body></html>")
+
+print("\nPoem generated and saved to website.")
