@@ -1,10 +1,10 @@
+
 <html>
 <head>
     <title>Weather Poem</title>
-
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
             color: #333;
             text-align: center;
@@ -12,104 +12,63 @@
         }
 
         h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 20px;
-            margin-bottom: 25px;
+            font-size: 40px;
+            margin-bottom: 20px;
         }
 
         .flag {
             font-size: 40px;
-            margin-bottom: 25px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .weather-box {
-            background: rgba(255,255,255,0.9);
-            padding: 20px;
-            border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            font-size: 18px;
-        }
-
-        .weather-item {
-            margin: 8px 0;
-            font-weight: bold;
         }
 
         .poem-box {
             background: white;
             padding: 30px;
             border-radius: 15px;
+            max-width: 850px;
+            margin: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: center;
-            line-height: 1.8;
-        }
-
-        .section-title {
-            font-size: 22px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        hr {
-            margin: 25px 0;
-            border: none;
-            border-top: 1px solid #ddd;
+            text-align: left;
+            white-space: pre-wrap;
+            line-height: 1.7;
         }
     </style>
 </head>
-
 <body>
+    <h1>🌦️ Weather Poem 🌦️</h1>
+    <div class="flag">🇧🇦 Bosnia &nbsp;&nbsp; 🇩🇰 Denmark</div>
+    <div class="poem-box">**English Section: Whispering Skies**
 
-    <div class="container">
+In Bosnia's gentle breeze, 11.1 degrees high,
+A warmth that whispers secrets to the open sky.
+Copenhagen's chill, 7.5 degrees so fine,
+A Danish charm that beckons, icy wind divine.
 
-        <h1>🌦️ Weather Poem 🌦️</h1>
-        <div class="subtitle">Comparing Bosnia & Denmark</div>
+Aalborg's windswept streets, 11.0 degrees serene,
+Aalborg's beauty stirs, a soothing, peaceful sheen.
+Their skies are clear, a transparent canvas wide,
+No clouds to hide the sun, no rain to abide.
 
-        <div class="flag">🇧🇦 🇩🇰</div>
+Which place to choose for tomorrow's delight?
+Perhaps Bosnia's warmth, where stars shine bright.
+But if you yearn for something fresh and clean,
+Aalborg's gentle breeze may be the perfect scene.
 
-        <!-- WEATHER SECTION -->
-        <div class="weather-box">
-            <h2>🌡️ Weather Tomorrow</h2>
+**Bosanski Odjek: Šumovi Nebeski**
 
-            <!-- THIS PART WILL BE FILLED BY PYTHON -->
-            {weather_display}
+U Bosni, blagu zimi, 11.1 stepena visoko,
+Tople zvukovi šumaju otvorima za nebo.
+Kopenhagen, hladna temperatura, 7.5 stepena lagano,
+Danska čarolija poziva, hladnim vjetrom.
 
-        </div>
+Aalborg, širokog dijela, 11.0 stepena mirno,
+Aalborgova ljepota stvarna, uspoka, tišina i svetlost.
+Njihova nebela, transparentni štand, širok,
+Ni oblaci da zasaka suncu, ni kiša da bude prisutna.
 
-        <!-- POEM -->
-        <div class="poem-box">
-
-            <div class="section-title">🇬🇧 English</div>
-            <p>{poem_en}</p>
-
-            <hr>
-
-            <div class="section-title">🇧🇦 Bosanski</div>
-            <p>{poem_bs}</p>
-
-        </div>
-
-    </div>
-
-</body>
-</html>Aalborg je tih, 11.0°C, vjetar koji umiruje,
-Ali kome će biti ljubavni ujutru bez straha ili straha?
-
-Odgovor nije u tihi vjetar koji prolazi šumom,
-Već u mjestu gdje tiha temperatura ljubav čini sjajnom.
-Sutra bismo išle u Aalborg, s 11.0°C i vjetrom koji umiruje,
-Iako bi Bosna i Kopenhagen također bili lijepi mjesti.
-
-Translation note: This translation may not be perfect as the nuances of languages can vary, but I have tried to give the most accurate translation possible while maintaining the original tone and form of the poem.</div>
+Koji mjesto izabrati za sutrašnje rado?
+Možda Bosna, toplo i toplom, gdje zvijezde svijetle.
+Ali ako si zaljubljen i u štoča čisto,
+Aalborgova lagana bura, savršeno mjesto.</div>
 </body>
 </html>
