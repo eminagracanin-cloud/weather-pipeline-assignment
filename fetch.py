@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS weather (
 )
 """)
 
-# Optional: clear old rows so each run shows fresh data
+# Clear old rows
 cursor.execute("DELETE FROM weather")
 
 # Fetch weather data
@@ -55,21 +55,18 @@ for name, (lat, lon) in locations.items():
 
 conn.commit()
 
-# Read weather data for poem
+# Read weather data
 cursor.execute("SELECT * FROM weather")
 rows = cursor.fetchall()
 conn.close()
 
-# Generate poem with Groq
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
+# Prepare weather display
 weather_text = ""
 weather_display = ""
 
 for row in rows:
     location, date, temp, wind, rain = row
 
-    # Simple weather emoji logic
     if rain > 2:
         emoji = "🌧️"
     elif wind > 20:
@@ -84,20 +81,27 @@ for row in rows:
     )
 
     flag = "🇧🇦" if location == "Bosnia" else "🇩🇰"
+    weather_display += f'<div class="weather-item">{flag} {location}: {temp}°C {emoji}</div>'
 
-    weather_display += f"{flag} {location}: {temp}°C {emoji}<br>"
+# Generate poem with Groq
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 prompt = f"""
-Write a short, creative weather poem comparing these three locations:
+Write a short poetic comparison of the weather in these locations:
 
 {weather_text}
 
 Requirements:
-- Compare Bosnia, Copenhagen, and Aalborg
+- Compare the three places
 - Say where it would be nicest to be tomorrow
 - Write in two languages: English and Bosnian
-- Keep it elegant and easy to read
-- Format it with a clear English section and a clear Bosnian section
+- Use this exact structure:
+
+English:
+<english poem>
+
+Bosanski:
+<bosnian poem>
 """
 
 response = client.chat.completions.create(
@@ -105,7 +109,18 @@ response = client.chat.completions.create(
     messages=[{"role": "user", "content": prompt}]
 )
 
-poem = response.choices[0].message.content
+poem = response.choices[0].message.content.strip()
+
+# Split poem into English and Bosnian sections
+poem_en = poem
+poem_bs = ""
+
+if "Bosanski:" in poem:
+    parts = poem.split("Bosanski:", 1)
+    poem_en = parts[0].replace("English:", "").strip()
+    poem_bs = parts[1].strip()
+else:
+    poem_en = poem.replace("English:", "").strip()
 
 # Save styled HTML page
 html_content = f"""
@@ -114,7 +129,7 @@ html_content = f"""
     <title>Weather Poem</title>
     <style>
         body {{
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
             color: #333;
             text-align: center;
@@ -122,32 +137,87 @@ html_content = f"""
         }}
 
         h1 {{
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }}
+
+        .subtitle {{
+            font-size: 20px;
+            margin-bottom: 25px;
         }}
 
         .flag {{
             font-size: 40px;
+            margin-bottom: 25px;
+        }}
+
+        .container {{
+            max-width: 900px;
+            margin: auto;
+        }}
+
+        .weather-box {{
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }}
+
+        .weather-item {{
+            margin: 8px 0;
+            font-weight: bold;
         }}
 
         .poem-box {{
             background: white;
             padding: 30px;
             border-radius: 15px;
-            max-width: 850px;
-            margin: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: left;
-            white-space: pre-wrap;
-            line-height: 1.7;
+            text-align: center;
+            line-height: 1.8;
+        }}
+
+        .section-title {{
+            font-size: 22px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }}
+
+        .poem-text {{
+            white-space: pre-line;
+        }}
+
+        hr {{
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #ddd;
         }}
     </style>
 </head>
 <body>
-    <h1>🌦️ Weather Poem 🌦️</h1>
-    <div class="flag">🇧🇦 Bosnia &nbsp;&nbsp; 🇩🇰 Denmark</div>
-    <div class="poem-box">{poem}</div>
+    <div class="container">
+        <h1>🌦️ Weather Poem 🌦️</h1>
+        <div class="subtitle">Comparing Bosnia & Denmark</div>
+        <div class="flag">🇧🇦 🇩🇰</div>
+
+        <div class="weather-box">
+            <h2>🌡️ Weather Tomorrow</h2>
+            {weather_display}
+        </div>
+
+        <div class="poem-box">
+            <div class="section-title">🇬🇧 English</div>
+            <div class="poem-text">{poem_en}</div>
+
+            <hr>
+
+            <div class="section-title">🇧🇦 Bosanski</div>
+            <div class="poem-text">{poem_bs}</div>
+        </div>
+    </div>
 </body>
 </html>
 """
