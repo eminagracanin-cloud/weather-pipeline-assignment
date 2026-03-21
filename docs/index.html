@@ -4,7 +4,7 @@
     <title>Weather Poem</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
             color: #333;
             text-align: center;
@@ -12,63 +12,143 @@
         }
 
         h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 25px;
         }
 
         .flag {
             font-size: 40px;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .weather-box {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }
+
+        .weather-item {
+            margin: 8px 0;
+            font-weight: bold;
         }
 
         .poem-box {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            max-width: 850px;
-            margin: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: left;
-            white-space: pre-wrap;
-            line-height: 1.7;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .poem-text {
+            white-space: pre-line;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
-    <h1>🌦️ Weather Poem 🌦️</h1>
-    <div class="flag">🇧🇦 Bosnia &nbsp;&nbsp; 🇩🇰 Denmark</div>
-    <div class="poem-box">**English Section: Whispering Skies**
+    <div class="container">
+        <h1>🌦️ Weather Poem 🌦️</h1>
+        <div class="subtitle">Comparing Bosnia & Denmark</div>
+        <div class="flag">🇧🇦 🇩🇰</div>
 
-In Bosnia's gentle breeze, 11.1 degrees high,
-A warmth that whispers secrets to the open sky.
-Copenhagen's chill, 7.5 degrees so fine,
-A Danish charm that beckons, icy wind divine.
+        <div class="weather-box">
+            <h2>🌡️ Weather Tomorrow</h2>
+            <div class="weather-item">🇧🇦 Bosnia: 11.1°C ☀️</div><div class="weather-item">🇩🇰 Copenhagen: 7.5°C ☀️</div><div class="weather-item">🇩🇰 Aalborg: 11.0°C ☀️</div>
+        </div>
 
-Aalborg's windswept streets, 11.0 degrees serene,
-Aalborg's beauty stirs, a soothing, peaceful sheen.
-Their skies are clear, a transparent canvas wide,
-No clouds to hide the sun, no rain to abide.
+        <div class="poem-box">
+            <div class="section-title">🇬🇧 English</div>
+            <div class="poem-text">In distant lands, a tale unfolds,
+Of Bosnia's calm, where warmth is told,
+A gentle breeze caresses the ground,
+With sunshine bright, and not a cloud around.
 
-Which place to choose for tomorrow's delight?
-Perhaps Bosnia's warmth, where stars shine bright.
-But if you yearn for something fresh and clean,
-Aalborg's gentle breeze may be the perfect scene.
+Copenhagen's chill, a northern breeze,
+A city cold, with icy seas,
+The city sleeps, in icy hold,
+But still a beauty, young and old.
 
-**Bosanski Odjek: Šumovi Nebeski**
+Aalborg's sea, a gentle sway,
+A city waking, on a new day,
+The wind whispers low, of secrets kept,
+A place of tranquility, in eternal sleep.
 
-U Bosni, blagu zimi, 11.1 stepena visoko,
-Tople zvukovi šumaju otvorima za nebo.
-Kopenhagen, hladna temperatura, 7.5 stepena lagano,
-Danska čarolija poziva, hladnim vjetrom.
+If I had to choose, where to be,
+Perhaps I'd wander, wild and free,
+In Bosnia's fields, where sunflowers stand,
+And warmth of the earth, beneath my hand.</div>
 
-Aalborg, širokog dijela, 11.0 stepena mirno,
-Aalborgova ljepota stvarna, uspoka, tišina i svetlost.
-Njihova nebela, transparentni štand, širok,
-Ni oblaci da zasaka suncu, ni kiša da bude prisutna.
+            <hr>
 
-Koji mjesto izabrati za sutrašnje rado?
-Možda Bosna, toplo i toplom, gdje zvijezde svijetle.
-Ali ako si zaljubljen i u štoča čisto,
-Aalborgova lagana bura, savršeno mjesto.</div>
+            <div class="section-title">🇧🇦 Bosanski</div>
+            <div class="poem-text">U udaljenim krajevima, jedna priča zavjetrila je,
+O mirnoj Bosni, gdje toplina je pričana,
+Meku breskva dirkalica uz tlo,
+S vlažnom svjetlošću, bez jedne oblaka okolo.
+
+Kopenhagenov hlad, sjeće sjevernih vjetrova,
+Grad koji leži, u ledomrljenom grijehu,
+Grad spava, u hladnom ujetištu,
+Mada još uvijek lepota, mlad i stari.
+
+Aalborgov more, mekuša lopotku,
+Grad koji se budio, na novi dan,
+Vjetar šumi tiho, o sakrivenim tajnama,
+Mjesto mira kojih, u vječnom spavanju.
+
+Ako bih morao izabrati, gdje da budem,
+Možda ja bih se kretao, divlje i slobodno,
+U bosanskim poljima gdje sunuzi stoje,
+I toplina cveća za mene, u dlanu.
+
+Translated from Bosnian:
+In distant lands, a tale has unfolded,
+Of calm Bosnia, where warmth is narrated,
+A soft breeze caresses the ground,
+With soft light, without a single cloud around.
+
+Kopenhagen's coldness, remembers northern winds,
+A city that lies, in a thawed sin,
+The city sleeps, in a cold confinement,
+Yet still it's beauty, young and old.
+
+Aalborg's sea, softens its waves,
+A city that wakes, on a new day,
+The wind whispers softly, about hidden secrets,
+A place of peace that sleeps, in eternal sleep.
+
+If I had to choose, where to be,
+Maybe I would wander, wild and free,
+In Bosnia's fields, where sunflowers stand,
+And the warmth of the flowers for me, in my hand.</div>
+        </div>
+    </div>
 </body>
 </html>
