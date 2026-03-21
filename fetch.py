@@ -34,13 +34,22 @@ for name, (lat, lon) in locations.items():
         f"timezone=auto"
     )
 
-    response = requests.get(url)
+try:
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
     data = response.json()
 
     date = data["daily"]["time"][0]
     temperature = data["daily"]["temperature_2m_max"][0]
     precipitation = data["daily"]["precipitation_sum"][0]
     windspeed = data["daily"]["windspeed_10m_max"][0]
+
+    cursor.execute("""
+    INSERT INTO weather VALUES (?, ?, ?, ?, ?)
+    """, (name, date, temperature, windspeed, precipitation))
+
+except Exception as e:
+    print(f"Error fetching weather for {name}: {e}")
 
     cursor.execute("""
     INSERT INTO weather VALUES (?, ?, ?, ?, ?)
